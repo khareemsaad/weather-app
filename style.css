@@ -1,0 +1,518 @@
+/* ==========================================================================
+   COMPLETE WEATHER APP STYLESHEET (With Charcoal Dark Theme Toggle Engine)
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Makes color transitions smooth */
+}
+
+body {
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+.app-container {
+    background-color: #ffffff;
+    max-width: 1400px;
+    width: 100%;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: #1a365d;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   THEME TOGGLE SLIDER SYSTEM STYLES
+   ========================================================================== */
+.theme-switch-wrapper {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 110; /* Keeps it above mobile navigation bars if needed */
+}
+
+.theme-mode-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    width: 46px;
+}
+
+.theme-switch input {
+    display: none; /* Hide standard ugly html checkbox box square */
+}
+
+.slider {
+    background-color: #cbd5e1;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 16px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 16px;
+}
+
+input:checked + .slider {
+    background-color: #3182ce;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   REST OF ORIGINAL INTERFACE DESIGN CORE ELEMENTS
+   ========================================================================== */
+.search-box-container {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+#city-input {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f7fafc;
+}
+
+#city-input:focus {
+    border-color: #3182ce;
+    background-color: #ffffff;
+}
+
+#search-btn {
+    padding: 12px 20px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#suggestions-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestions-hidden {
+    display: none;
+}
+
+.suggestion-item {
+    padding: 14px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4a5568;
+    border-bottom: 1px solid #f7fafc;
+}
+
+.suggestion-item:hover {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+}
+
+.weather-display {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.current-section {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#location-name {
+    color: #2d3748;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+#weather-desc {
+    font-size: 15px;
+    color: #718096;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.data-card {
+    background-color: #f8fafc;
+    border: 1px solid #f1f5f9;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.data-card h3 {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.data-card p {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.forecast-section {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+}
+
+.forecast-section h3 {
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hourly-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    height: 0; 
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.hourly-card {
+    display: grid;
+    grid-template-columns: 55px 70px 95px 70px 100px 50px;
+    gap: 10px;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.hourly-time {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.hourly-item-temp, .hourly-item-feel, .hourly-item-uv, .hourly-item-wind, .hourly-item-drop {
+    font-size: 13px;
+    color: #4a5568;
+    white-space: nowrap;
+}
+
+.hourly-item-drop {
+    text-align: right;
+}
+
+.daily-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.daily-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.daily-day {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 14px;
+    width: 70px;
+}
+
+.daily-precip {
+    color: #3182ce;
+    font-weight: 600;
+    font-size: 12px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 20px;
+    text-align: center;
+    min-width: 55px;
+}
+
+.daily-temps {
+    font-size: 14px;
+    color: #2d3748;
+    font-weight: 600;
+    text-align: right;
+    width: 110px;
+}
+
+.mobile-nav-bar {
+    display: none;
+}
+
+/* ==========================================================================
+   👇 GENERIC CHARCOAL DARK THEME CODE DECLARATIONS OVERRIDES 👇
+   ========================================================================== */
+[data-theme="dark"] body {
+    background-color: #1a202c; /* Charcoal Dark Backdrop Canvas */
+}
+
+[data-theme="dark"] .app-container {
+    background-color: #2d3748; /* Lighter Charcoal App Plate Box */
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] #location-name {
+    color: #f7fafc; /* Crisp clean White Text */
+}
+
+[data-theme="dark"] #weather-desc {
+    color: #cbd5e1; /* Smooth Slate descriptions text */
+}
+
+[data-theme="dark"] #city-input {
+    background-color: #1a202c;
+    border-color: #4a5568;
+    color: #ffffff;
+}
+
+[data-theme="dark"] #suggestions-box {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .suggestion-item {
+    color: #e2e8f0;
+    border-bottom-color: #1a202c;
+}
+
+[data-theme="dark"] .suggestion-item:hover {
+    background-color: #4a5568;
+    color: #3182ce;
+}
+
+/* Dark theme overrides for data container box cards backgrounds */
+[data-theme="dark"] .data-card, 
+[data-theme="dark"] .forecast-section {
+    background-color: #1a202c;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .data-card h3, 
+[data-theme="dark"] .forecast-section h3 {
+    color: #a0aec0;
+}
+
+[data-theme="dark"] .data-card p {
+    color: #ffffff;
+}
+
+/* Hourly & Daily items row components dark properties layout override rules */
+[data-theme="dark"] .hourly-card, 
+[data-theme="dark"] .daily-row {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .hourly-time, 
+[data-theme="dark"] .daily-day, 
+[data-theme="dark"] .daily-temps {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .hourly-item-temp, 
+[data-theme="dark"] .hourly-item-feel, 
+[data-theme="dark"] .hourly-item-uv, 
+[data-theme="dark"] .hourly-item-wind {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .theme-mode-label {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .mobile-nav-bar {
+    background-color: #2d3748;
+    border-top-color: #4a5568;
+}
+
+/* ==========================================================================
+   MOBILE INTERFACE SYSTEM OVERRIDE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1100px) {
+    body {
+        padding: 0;
+        background-color: #ffffff;
+    }
+
+    .app-container {
+        border-radius: 0;
+        box-shadow: none;
+        padding: 70px 20px 90px 20px; /* Increased top padding so toggle switch doesn't cover title header fields */
+        min-height: 100vh;
+    }
+
+    /* Keep toggle cleanly floating pinned top right corner on smart devices */
+    .theme-switch-wrapper {
+        top: 20px;
+        right: 20px;
+    }
+
+    .weather-display {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .mobile-tab-content {
+        display: none !important;
+    }
+
+    .mobile-tab-content.active-tab {
+        display: flex !important;
+    }
+
+    .current-section {
+        align-self: stretch;
+    }
+
+    .hourly-scroll {
+        height: auto;
+        max-height: calc(100vh - 280px);
+    }
+
+    .hourly-card {
+        grid-template-columns: 50px 65px 85px 65px 85px 45px;
+        gap: 8px;
+        padding: 12px 10px;
+    }
+
+    .mobile-nav-bar {
+        display: none;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        border-top: 1px solid #e2e8f0;
+        padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+        z-index: 100;
+    }
+
+    /* Only show nav bar on mobile if mobile grid system activated */
+    .mobile-nav-bar {
+        display: flex;
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: #a0aec0;
+        cursor: pointer;
+        flex: 1;
+        transition: all 0.15s ease;
+    }
+
+    .nav-icon {
+        font-size: 20px;
+    }
+
+    .nav-text {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .nav-btn.active-btn {
+        color: #3182ce;
+    }
+}

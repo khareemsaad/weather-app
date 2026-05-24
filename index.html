@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="theme-switch-wrapper">
+            <span class="theme-mode-label">🌙 Dark Mode</span>
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <h1>Weather Forecast</h1>
+
+        <div class="search-box-container">
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Search for a city..." autocomplete="off">
+                <button id="search-btn">Search</button>
+            </div>
+            <div id="suggestions-box" class="suggestions-hidden"></div>
+        </div>
+
+        <div class="weather-display">
+            
+            <div id="section-home" class="current-section mobile-tab-content active-tab">
+                <h2 id="location-name">Your Location</h2>
+                <div id="weather-desc">Awaiting lookups...</div>
+                
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h3>Temperature</h3>
+                        <p id="temp-val">-- °C</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Real-Feel</h3>
+                        <p id="feel-val">-- °C</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Clouds</h3>
+                        <p id="cloud-val">-- %</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>UV Index</h3>
+                        <p id="uv-val">--</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Wind</h3>
+                        <p id="wind-val">-- km/h</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Precipitation</h3>
+                        <p id="precip-val">-- mm</p>
+                    </div>
+                </div>
+            </div> 
+
+            <div id="section-hour" class="forecast-section mobile-tab-content">
+                <h3>Hourly Forecast (Next 24 Hours)</h3>
+                <div id="hourly-container" class="hourly-scroll">
+                    </div>
+            </div>
+
+            <div id="section-day" class="forecast-section mobile-tab-content">
+                <h3>7-Day Forecast</h3>
+                <div id="daily-container" class="daily-list">
+                    </div>
+            </div>
+
+        </div> <div class="mobile-nav-bar">
+            <button class="nav-btn active-btn" onclick="switchMobileTab('home', this)">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Home</span>
+            </button>
+            <button class="nav-btn" onclick="switchMobileTab('hour', this)">
+                <span class="nav-icon">⏰</span>
+                <span class="nav-text">Hour</span>
+            </button>
+            <button class="nav-btn" onclick="switchMobileTab('day', this)">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">7-Day</span>
+            </button>
+        </div>
+
+    </div> <script src="script.js"></script>
+</body>
+</html>
